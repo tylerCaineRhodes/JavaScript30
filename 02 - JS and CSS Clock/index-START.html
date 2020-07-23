@@ -5,6 +5,7 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
+  <h1></h1>
 
 
     <div class="clock">
@@ -18,7 +19,7 @@
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: #018DED url(https://picsum.photos/1500/1000);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -32,19 +33,41 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+      justify-content: center;
+      
+    }
+    h1 {
+      align-self: flex-start;
+
+    }
+    @media only screen and (max-width: 487px){
+      .clock {
+        transform: scale(0.5)
+      }
+    }
+    @media only screen and (max-width: 357px){
+      .clock {
+        transform: scale(0.4)
+      }
+    }
+    @media only screen and (min-width: 1046px){
+      .clock {
+        transform: scale(2)
+      }
     }
 
     .clock {
       width: 30rem;
       height: 30rem;
-      border: 20px solid white;
+      border: 8px solid rgba(255, 255, 255, 0.993);
       border-radius: 50%;
       margin: 50px auto;
       position: relative;
-      padding: 2rem;
+      padding: 1rem;
+      transition: all 0.5s;
       box-shadow:
         0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 0 3px #ffffff0c,
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
@@ -62,13 +85,40 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(0.28, 1.93, 0.58, 1);
     }
 
   </style>
 
   <script>
+    const secondHand = document.querySelector('.second-hand');
+    const minuteHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+    const timeDescription = document.querySelector('h1')
 
+    const setDate = () => {
+      const now = new Date();
 
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+      const hoursIn12 = hours % 12;
+      
+      timeDescription.innerHTML = minutes < 10 ? `${hoursIn12}:0${minutes}` :`${hoursIn12}:${minutes}`;
+      timeDescription.style.color = 'white';
+
+      const secondsDegrees = ((seconds / 60) * 360) + 90;
+      const minutesDegrees = ((minutes / 60) * 360) + 90;
+      const hoursDegrees = ((hours / 12) * 360) + 90;
+
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+    }
+    setInterval(setDate, 1000);
   </script>
 </body>
 </html>

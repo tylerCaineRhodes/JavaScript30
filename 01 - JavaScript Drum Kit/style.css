@@ -1,6 +1,6 @@
 html {
   font-size: 10px;
-  background: url(https://i.imgur.com/b9r5sEL.jpg) bottom center;
+  background: url(https://picsum.photos/1500/1000) bottom center;
   background-size: cover;
 }
 
@@ -11,23 +11,40 @@ body,html {
 }
 
 .keys {
-  display: flex;
-  flex: 1;
+  display: flex; 
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+}
+@media only screen and (max-width: 800px){
+  .keys {
+    flex-flow: row wrap;
+    align-content: center;
+  }
+  .key {
+    flex-basis: 20%;
+  }
+}
+@media only screen and (max-width: 341px){
+  .keys {
+    flex-flow: row wrap;
+    align-content: space-around;
+    spa
+  }
+  .key {
+    flex-basis: 42%;
+  }
 }
 
 .key {
   border: .4rem solid black;
   border-radius: .5rem;
   margin: 1rem;
+  color: red;
   font-size: 1.5rem;
-  padding: 1rem .5rem;
+  padding: 2%;
   transition: all .07s ease;
-  width: 10rem;
   text-align: center;
-  color: white;
   background: rgba(0,0,0,0.4);
   text-shadow: 0 0 .5rem black;
 }
