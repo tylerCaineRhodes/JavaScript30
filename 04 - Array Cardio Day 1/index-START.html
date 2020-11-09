@@ -31,29 +31,61 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const fifteen = inventors.filter(person => person.year < 1600 && person.year > 1499);
+    console.table(fifteen)
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const fullnames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(fullnames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const birthDates = inventors.sort((a, b) => a.year - b.year);
+    console.table(birthDates)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totalYearsLived = inventors.reduce((acc, obj) => {
+      let sumYears = obj.passed - obj.year;
+      return acc + sumYears;
+    }, 0)
+    console.log(totalYearsLived)
 
     // 5. Sort the inventors by years lived
+    const oldest = inventors.sort((a,b) => {
+      const a_age = a.passed - a.year
+      const b_age = b.passed - b.year;
+      return a.a_age - b.b_age
+    })
+    console.table(oldest)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    const category = document.querySelector('.mw-category');
+    const links = Array.from(category.querySelectorAll('a'));
+    const de = links.map(link => link.textContent).filter(street => streetname.includes('de'))
+    
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    let lastNames = people.sort((a, b) => {
+      const [a_last, a_first] = a.split(', ');
+      const [b_last, b_first] = a.split(', ');
+      return a_last - b_last;
+    });
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const summedcars = data.reduce((acc, car) => {
+      if(!acc[car]){
+        acc[car] = 1;
+      } else {
+        acc[car]++;
+      }
+      return acc;
+    },{});
+    console.log(summedcars)
   </script>
 </body>
 </html>

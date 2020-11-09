@@ -13,8 +13,32 @@
       <div class="speed-bar">1×</div>
     </div>
   </div>
+  <div>
+   
+
+    <audio class="audio-test" src="../01 - JavaScript Drum Kit/sounds/tink.wav" loop controls>
+      <div class="speed-audio">
+      <div class="speed-bar-audio">1×</div>
+    </div>
+    </audio>
+  </div>
 
 <script>
+  const bar = speed.querySelector('.speed-bar');
+  const video = document.querySelector('.flex');
+
+  speed.addEventListener('mousemove', function(e){
+    const y = e.pageY - this.offsetTop;
+    const percent = y / this.offsetHeight;
+    const min = 0.4;
+    const max = 4;
+    const height = (Math.round(percent * 100)) + '%'
+    const playbackRate = percent * (max - min) + min;
+
+    bar.style.height = height;
+    bar.textContent = playbackRate.toFixed(2) + 'x';
+    video.playbackRate = playbackRate;
+  })
 </script>
 </body>
 </html>

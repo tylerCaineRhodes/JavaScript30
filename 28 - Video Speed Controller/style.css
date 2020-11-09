@@ -10,8 +10,9 @@ body {
 }
 
 .wrapper {
-  width: 850px;
+  width: 350px;
   display: flex;
+  flex-direction: row;
 }
 
 video {
@@ -23,6 +24,7 @@ video {
   flex: 1;
   display: flex;
   align-items: flex-start;
+  height: 200px;
   margin: 10px;
   border-radius: 50px;
   box-shadow: 0 0 1px 3px rgba(0,0,0,0.1);
