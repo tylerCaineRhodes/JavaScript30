@@ -40,8 +40,27 @@
   }
 </style>
 
-<button></button>
+<button>Here is a button</button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+    // e.stopPropagation();
+    console.log(this.classList.value);
+  }
+  //capture - run on the way down- default is false
+  //once - unbinds itself after called - same as document.removeEventListener
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false,
+    once: true
+  }))
+
+  button.addEventListener('click', () => {
+    console.log('only triggers once')
+  }, {
+    once: true
+  });
 
 </script>
 </body>
